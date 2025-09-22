@@ -14,9 +14,9 @@ class Products(Base):
     name = Column(String(100), nullable=False)
     price = Column(DECIMAL(10,2), nullable=False)
     in_stock = Column(Boolean)
-    category_id = Column(Integer,ForeignKey('category.id'))
+    category_id = Column(Integer,ForeignKey('categories.id'))
 
-    category = relationship("Categories", back_populates="products")
+    categories = relationship("Categories", back_populates="products")
 
 class Categories(Base):
     __tablename__ = "categories"
@@ -24,6 +24,6 @@ class Categories(Base):
     name = Column(String(100), nullable=False)
     description = Column(String(255))
 
-    product = relationship("Products", back_populates="categories")
+    products = relationship("Products", back_populates="categories")
 
 Base.metadata.create_all(engine)
